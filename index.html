@@ -1,0 +1,781 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+        <title>Бездымный Северодвинск — табачный магазин</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: system-ui, -apple-system, 'Inter', 'Segoe UI', Roboto, 'Montserrat', sans-serif;
+                background: #ffffff;
+                color: #121212;
+                line-height: 1.45;
+            }
+
+            .container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            /* ===== ШАПКА ЦЕЛЬНАЯ ===== */
+            .site-header {
+                background: #ffffff;
+                border-bottom: 1px solid #eaeef2;
+                padding: 16px 0;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                backdrop-filter: blur(2px);
+                background: rgba(255,255,255,0.96);
+            }
+
+            .header-inner {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .logo-area {
+                display: flex;
+                align-items: baseline;
+                gap: 6px;
+                flex-wrap: wrap;
+            }
+
+            .logo-icon {
+                font-size: 28px;
+                color: #111;
+                background: #f4f6f9;
+                padding: 8px;
+                border-radius: 28px;
+            }
+
+            .logo-text {
+                font-weight: 800;
+                font-size: 24px;
+                letter-spacing: -0.3px;
+                color: #0a0a0a;
+            }
+
+            .logo-city {
+                font-weight: 600;
+                font-size: 18px;
+                color: #5b6e8c;
+                margin-left: 4px;
+            }
+
+            /* ===== ЯРКИЙ БЛОК ЗАКАЗА ===== */
+            .order-block {
+                background: linear-gradient(135deg, #fef9e6 0%, #fff4e0 100%);
+                border-radius: 32px;
+                padding: 28px 24px;
+                margin: 28px 0 20px;
+                border: 1px solid #ffe4b5;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            }
+
+            .order-title {
+                font-size: 22px;
+                font-weight: 800;
+                color: #1a2c3e;
+                margin-bottom: 8px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .order-title i {
+                color: #e67e22;
+                font-size: 26px;
+            }
+
+            .order-sub {
+                font-size: 14px;
+                color: #5b6e8c;
+                margin-bottom: 20px;
+                border-left: 3px solid #e67e22;
+                padding-left: 12px;
+            }
+
+            .order-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .order-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 28px;
+                border-radius: 60px;
+                font-weight: 700;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                font-size: 15px;
+            }
+
+            .order-btn.phone {
+                background: #000000;
+                color: white;
+                border: 1px solid #000;
+            }
+
+            .order-btn.phone:hover {
+                background: #2c2c2c;
+                transform: scale(0.98);
+            }
+
+            .order-btn.tg {
+                background: #2c2f33;
+                color: white;
+                border: 1px solid #2c2f33;
+            }
+
+            .order-btn.tg:hover {
+                background: #1e1f22;
+            }
+
+            .order-btn.vk {
+                background: #2787f5;
+                color: white;
+                border: 1px solid #2787f5;
+            }
+
+            .order-btn.vk:hover {
+                background: #1a6bc2;
+            }
+
+            .order-note {
+                background: white;
+                border-radius: 20px;
+                padding: 14px 18px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #1e2a3e;
+                border: 1px dashed #f0c48b;
+                display: inline-block;
+            }
+
+            .order-note i {
+                color: #e67e22;
+                margin-right: 8px;
+            }
+
+            /* ===== ПОИСК ===== */
+            .search-section {
+                margin: 24px 0 20px;
+            }
+
+            .search-wrapper {
+                display: flex;
+                background: #ffffff;
+                border: 1.5px solid #e2e8f0;
+                border-radius: 60px;
+                padding: 4px 4px 4px 20px;
+                transition: all 0.2s;
+            }
+
+            .search-wrapper:focus-within {
+                border-color: #000000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            }
+
+            #searchInput {
+                flex: 1;
+                border: none;
+                outline: none;
+                font-size: 15px;
+                padding: 12px 0;
+                background: transparent;
+            }
+
+            .search-btn {
+                background: #000;
+                color: #fff;
+                border: none;
+                padding: 8px 22px;
+                border-radius: 50px;
+                font-weight: 600;
+                cursor: pointer;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+
+            #searchStatus {
+                margin: 10px 0 4px 8px;
+                font-size: 12px;
+                color: #5b6e8c;
+            }
+
+            /* ===== ФИЛЬТРЫ ===== */
+            .filter-group {
+                margin: 16px 0 14px;
+            }
+
+            .filter-title {
+                font-size: 14px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 10px;
+                color: #1e2a3e;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .chips-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .filter-chip, .brand-chip {
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
+                padding: 6px 18px;
+                border-radius: 40px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+                color: #1e293b;
+                white-space: nowrap;
+            }
+
+            .filter-chip.active, .brand-chip.active {
+                background: #000000;
+                border-color: #000000;
+                color: white;
+            }
+
+            /* ===== КАРТОЧКИ ТОВАРОВ ===== */
+            .products-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+                margin: 28px 0 32px;
+            }
+
+            .product-card {
+                background: #ffffff;
+                border: 1px solid #edf2f7;
+                border-radius: 24px;
+                padding: 18px 16px;
+                transition: all 0.25s;
+                cursor: pointer;
+                position: relative;
+            }
+
+            .product-card:hover {
+                border-color: #cbd5e1;
+                box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.1);
+                transform: translateY(-3px);
+            }
+
+            .product-card::after {
+                content: "⤵";
+                position: absolute;
+                right: 18px;
+                bottom: 16px;
+                font-size: 14px;
+                color: #9aa9bf;
+                transition: transform 0.2s;
+            }
+
+            .product-card.expanded::after {
+                transform: rotate(180deg);
+                color: #000;
+            }
+
+            .product-image {
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                border-radius: 20px;
+                background: #f1f5f9;
+                margin-bottom: 14px;
+            }
+
+            .product-title {
+                font-weight: 800;
+                font-size: 18px;
+                margin-bottom: 4px;
+                color: #0f172a;
+            }
+
+            .product-brand {
+                font-size: 11px;
+                color: #5b6e8c;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+                font-weight: 600;
+            }
+
+            .product-price {
+                font-weight: 800;
+                font-size: 20px;
+                color: #000;
+                margin: 6px 0;
+            }
+
+            .product-badge {
+                background: #f1f5f9;
+                color: #0f172a;
+                font-size: 11px;
+                padding: 3px 12px;
+                border-radius: 24px;
+                display: inline-block;
+            }
+
+            .product-details {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.35s ease-out;
+                background: #fcfdff;
+                border-radius: 18px;
+                border: 1px solid transparent;
+            }
+
+            .product-card.expanded .product-details {
+                max-height: 320px;
+                margin-top: 18px;
+                border-color: #ecf3fa;
+                padding: 14px 12px;
+            }
+
+            .details-line {
+                display: flex;
+                margin-bottom: 8px;
+                font-size: 12px;
+                gap: 8px;
+            }
+
+            .details-label {
+                min-width: 75px;
+                font-weight: 700;
+                color: #334155;
+            }
+
+            .flavors-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .flavor-tag {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                padding: 2px 10px;
+                border-radius: 26px;
+                font-size: 10px;
+            }
+
+            /* ===== ВОПРОСЫ И ОТВЕТЫ ===== */
+            .faq-section {
+                margin: 40px 0 48px;
+                background: #fafcff;
+                border-radius: 32px;
+                padding: 28px 24px;
+                border: 1px solid #edf2f7;
+            }
+
+            .faq-title {
+                font-size: 22px;
+                font-weight: 800;
+                margin-bottom: 24px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .faq-item {
+                border-bottom: 1px solid #eef2f8;
+                padding: 16px 0;
+            }
+
+            .faq-question {
+                font-weight: 700;
+                font-size: 16px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+                color: #0f172a;
+            }
+
+            .faq-question i {
+                transition: transform 0.2s;
+                color: #5b6e8c;
+            }
+
+            .faq-answer {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                color: #475569;
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .faq-item.active .faq-answer {
+                max-height: 200px;
+                margin-top: 12px;
+            }
+
+            .faq-item.active .faq-question i {
+                transform: rotate(180deg);
+            }
+
+            .reset-btn {
+                background: transparent;
+                border: 1px solid #cbd5e1;
+                padding: 6px 16px;
+                border-radius: 40px;
+                font-size: 12px;
+                font-weight: 600;
+                cursor: pointer;
+                color: #334155;
+            }
+
+            .footer-note {
+                margin-top: 20px;
+                padding: 24px 0;
+                text-align: center;
+                border-top: 1px solid #ecf3fa;
+                color: #6c7a91;
+                font-size: 13px;
+            }
+
+            @media (max-width: 1100px) {
+                .products-grid { grid-template-columns: repeat(3, 1fr); }
+            }
+            @media (max-width: 780px) {
+                .products-grid { grid-template-columns: repeat(2, 1fr); }
+                .order-buttons { flex-direction: column; align-items: stretch; }
+                .order-btn { justify-content: center; }
+            }
+            @media (max-width: 520px) {
+                .products-grid { grid-template-columns: 1fr; }
+                .chips-row { overflow-x: auto; flex-wrap: nowrap; }
+                .search-wrapper { flex-wrap: wrap; }
+                .search-btn { width: 100%; margin-top: 8px; }
+                .logo-text { font-size: 20px; }
+                .logo-city { font-size: 14px; }
+            }
+        </style>
+    </head>
+    <body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo-area">
+                
+                <span class="logo-text">БЕЗДЫМНЫЙ</span>
+                <span class="logo-text">СЕВЕРОДВИНСК</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- ЯРКИЙ БЛОК ЗАКАЗА -->
+        <div class="order-block">
+            <div class="order-title">
+                <i class="fas fa-shopping-cart"></i> 
+                Как заказать?
+            </div>
+            <div class="order-sub">
+                Выбирайте товары, свяжитесь с нами любым удобным способом — и мы всё оформим
+            </div>
+            <div class="order-buttons">
+                <a href="tel:+79642999332" class="order-btn phone">
+                    <i class="fas fa-phone-alt"></i> 8 964 299-93-32
+                </a>
+                <a href="https://t.me/bezdymnyi_zakaz" target="_blank" class="order-btn tg">
+                    <i class="fab fa-telegram-plane"></i> Telegram: @bezdymnyi_zakaz
+                </a>
+                <a href="https://vk.ru/bezdymnyi_severodvinsk" target="_blank" class="order-btn vk">
+                    <i class="fab fa-vk"></i> ВКонтакте
+                </a>
+            </div>
+            <div class="order-note">
+                <i class="fas fa-shield-alt"></i> ⚡ Оплачивать ничего заранее не нужно! Заказывайте через любой мессенджер.
+            </div>
+        </div>
+
+        <!-- ПОИСК -->
+        <section class="search-section">
+            <div class="search-wrapper">
+                <i class="fas fa-search" style="margin-right: 8px; color: #7f8c9a; align-self: center;"></i>
+                <input type="text" id="searchInput" placeholder="Поиск: название, бренд, вкус..." autocomplete="off">
+                <button class="search-btn" id="searchButton"><i class="fas fa-arrow-right"></i> Найти</button>
+            </div>
+            <div id="searchStatus">🔍 Введите запрос или выберите категорию / бренд</div>
+        </section>
+
+        <!-- КАТЕГОРИИ -->
+        <div class="filter-group">
+            <div class="filter-title"><i class="fas fa-tag"></i> Категории</div>
+            <div class="chips-row" id="categoryChips">
+                <div class="filter-chip" data-category-filter="снюс"><i class="fas fa-box"></i> Снюс</div>
+                <div class="filter-chip" data-category-filter="электронные испарители"><i class="fas fa-wind"></i> Электронные испарители</div>
+                <div class="filter-chip" data-category-filter="картриджи"><i class="fas fa-exchange-alt"></i> Картриджи и испарители</div>
+            </div>
+        </div>
+
+        <!-- ПРОИЗВОДИТЕЛИ -->
+        <div class="filter-group">
+            <div class="filter-title"><i class="fas fa-industry"></i> Производители</div>
+            <div class="chips-row" id="brandChips">
+                <div class="brand-chip" data-brand-filter="Odens">Oden's</div>
+                <div class="brand-chip" data-brand-filter="KASTA">KASTA</div>
+                <div class="brand-chip" data-brand-filter="SIBERIA">SIBERIA</div>
+                <div class="brand-chip" data-brand-filter="NICTECH">NICTECH</div>
+                <div class="brand-chip" data-brand-filter="ARQA">ARQA</div>
+                <div class="brand-chip" data-brand-filter="FAFF">FAFF</div>
+                <div class="brand-chip" data-brand-filter="MAD">MAD</div>
+                <div class="brand-chip" data-brand-filter="WOLF">WOLF</div>
+                <div class="brand-chip" data-brand-filter="VAPORESSO">VAPORESSO</div>
+            </div>
+        </div>
+
+        <!-- ТОВАРЫ + СБРОС -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin: 24px 0 12px;">
+            <h3 style="font-weight: 700; font-size: 20px;"><i class="fas fa-cube"></i> Товары</h3>
+            <button class="reset-btn" id="globalResetBtn"><i class="fas fa-undo-alt"></i> Сбросить фильтры</button>
+        </div>
+        <div class="products-grid" id="productsContainer"></div>
+
+        <!-- БЛОК ВОПРОСЫ И ОТВЕТЫ -->
+        <div class="faq-section">
+            <div class="faq-title">
+                <i class="fas fa-question-circle"></i> Частые вопросы
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Нужно ли оплачивать заказ заранее?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Нет! Вы ничего не оплачиваете вперед. Заказываете через любой удобный мессенджер (Telegram, VK или по телефону), а оплата происходит при получении.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Как оформить заказ?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Просто выберите товары на сайте, свяжитесь с нами по телефону 8 964 299-93-32, в Telegram @bezdymnyi_zakaz или ВКонтакте. Назовите позиции — мы подтвердим наличие и договоримся о встрече.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Есть ли доставка по Северодвинску?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Да, работаем по городу. Уточняйте детали при заказе — возможна встреча в удобном месте или курьерская доставка (по договоренности).
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Можно ли забрать товар самовывозом?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Конечно! Мы всегда на связи, согласуем удобное время и точку встречи в Северодвинске.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Как узнать актуальный ассортимент?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    На сайте представлены основные позиции. Полный список и новинки уточняйте в мессенджерах — менеджер подскажет наличие и цену.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <i class="fas fa-store"></i> Бездымный Северодвинск · Только для совершеннолетних 18+ · Заказ без предоплаты
+        </div>
+    </main>
+
+    <script>
+        (function(){
+            // БАЗА ТОВАРОВ (с вашими картинками)
+            const productsData = [
+                // Снюс
+                { id: 1, title: 'SIBERIA RED', brand: 'SIBERIA', category: 'снюс', price: '550 ₽', strength: '45 мг/г', flavors: ['Холодная мята', 'Ментол'], description: 'Крепкий снюс с интенсивным холодком. 20 порций.', image: 'SIBERIA_RED.jpg' },
+                { id: 2, title: 'Odens Cold Dry', brand: 'Odens', category: 'снюс', price: '550 ₽', strength: '22 мг/г', flavors: ['Ледяная мята', 'Эвкалипт'], description: 'Популярный снюс, 24 порции.', image: 'Odens.jpg' },
+                { id: 3, title: 'KASTA', brand: 'KASTA', category: 'снюс', price: '550 ₽', strength: '101 мг/г', flavors: ['Лед', 'Мята'], description: 'Максимальная крепость, 20 порций.', image: 'KASTA.jpg' },
+                { id: 4, title: 'NICTECH V2', brand: 'NICTECH', category: 'снюс', price: '550 ₽', strength: '105 мг/г', flavors: ['Цитрус', 'Ягоды'], description: 'Сверхкрепкий, 24 порции.', image: 'NICTECHV2.jpg' },
+                { id: 5, title: 'NICTECH', brand: 'NICTECH', category: 'снюс', price: '550 ₽', strength: '60 мг/г', flavors: ['Манго', 'Маракуйя'], description: 'Фруктовый микс с освежающим эффектом. 20 пакетов', image: 'NICTECH.jpg' },
+                { id: 6, title: 'ARQA', brand: 'ARQA', category: 'снюс', price: '550 ₽', strength: '70 мг', flavors: ['Кола', 'Энергетик','Манго/Клубника','Бабл Гам','Банановый крем','Молоко с ягодами', 'Нектарин/Банан', 'Холодные ягоды', 'Малина/Виноград', 'Kлубника/Вишня','Клубничная Жвачка','Мята','Манго/Персик','Вишнёвый коктейль'], description: 'Количество пакетиков 20 шт. По вопросам покупки звоните 8 964 299-93-32', image: 'ARQA.jpg' },
+                { id: 9, title: 'FAFF', brand: 'FAFF', category: 'снюс', price: '550 ₽', strength: '150 мг', flavors: ['Кола', 'Энергетик', 'Манго/клубника', 'Бабл Гам', 'Банановый крем'], description: 'Количество пакетиков 20-25 шт. По вопросам покупки звоните 8 964 299-93-32', image: 'FAFF.jpg' },
+                { id: 10, title: 'KASTA PHOBIA', brand: 'KASTA', category: 'снюс', price: '550 ₽', strength: '125 мг', flavors: ['Кола', 'Энергетик', 'Манго/клубника', 'Бабл Гам', 'Банановый крем'], description: 'Количество пакетиков 20 шт. По вопросам покупки звоните 8 964 299-93-32', image: 'KASTAPH.jpg' },
+                { id: 11, title: 'WOLF', brand: 'WOLF', category: 'снюс', price: '550 ₽', strength: '100 мг', flavors: ['Кола', 'Энергетик', 'Манго/клубника', 'Бабл Гам', 'Банановый крем'], description: 'Количество пакетиков 20 шт. По вопросам покупки звоните 8 964 299-93-32', image: 'WOLF.jpg' },
+                { id: 12, title: 'Нкотиновые пластинки KASTA', brand: 'KASTA', category: 'снюс', price: '600 ₽', strength: 'strong', flavors: ['Кола', 'Энергетик', 'Манго/клубника', 'Бабл Гам', 'Банановый крем'], description: 'Количество пакетиков 65 шт. По вопросам покупки звоните 8 964 299-93-32', image: 'PlasKASTA.jpg' },
+                { id: 13, title: 'Нкотиновые пластинки MAD', brand: 'MAD', category: 'снюс', price: '550 ₽', strength: 'strong', flavors: ['Кола', 'Энергетик', 'Манго/клубника', 'Бабл Гам', 'Банановый крем'], description: 'Количество пакетиков 65 шт. По вопросам покупки звоните 8 964 299-93-32', image: 'PlaMAD.jpg' },
+                { id: 14, title: 'ARQA Tobacco series', brand: 'ARQA', category: 'снюс', price: '550 ₽', strength: '70 мг', flavors: ['1. Табак 🍁 🍂', '2. Вишня/Табак🍒 🍂', '3.Лимон/Табак🍋 🍂'], description: 'Количество пакетиков 20 шт. По вопросам покупки звоните 8 964 299-93-32', image: 'ARQATobaco.jpg' },
+                
+
+
+
+
+                // Электронные испарители
+                { id: 7, title: 'VAPORESSO XROS 3', brand: 'VAPORESSO', category: 'электронные испарители', price: '2 490 ₽', strength: '—', flavors: ['Настраиваемый обдув'], description: 'Pod-система, аккумулятор 1000 мАч, отличная передача вкуса.', image: 'https://placehold.co/400x400/e2e8f0/1e293b?text=XROS+3' },
+                
+                // Картриджи и испарители
+                { id: 8, title: 'Картридж XROS 0.8 Ом', brand: 'VAPORESSO', category: 'картриджи', price: '590 ₽', strength: '—', flavors: ['Сетка 0.8'], description: '2 шт в упаковке, подходят для XROS 3.', image: 'https://placehold.co/400x400/e2e8f0/1e293b?text=XROS+Cartridge' }
+            ];
+
+            const container = document.getElementById('productsContainer');
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchButton');
+            const searchStatus = document.getElementById('searchStatus');
+
+            let activeFilter = { search: '', category: '', brand: '' };
+
+            function renderProducts() {
+                const filtered = productsData.filter(p => {
+                    const searchLower = activeFilter.search;
+                    const searchMatch = searchLower === '' || 
+                        p.title.toLowerCase().includes(searchLower) ||
+                        p.brand.toLowerCase().includes(searchLower) ||
+                        (p.flavors && p.flavors.some(f => f.toLowerCase().includes(searchLower))) ||
+                        p.description.toLowerCase().includes(searchLower);
+                    const catMatch = !activeFilter.category || p.category === activeFilter.category;
+                    const brandMatch = !activeFilter.brand || p.brand === activeFilter.brand;
+                    return searchMatch && catMatch && brandMatch;
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding: 48px 20px; background:#fafcff; border-radius:48px;">
+                        <i class="fas fa-box-open" style="font-size: 44px; color:#a0afc3;"></i>
+                        <p style="margin-top: 16px;">Товары не найдены. Измените фильтры</p>
+                    </div>`;
+                    searchStatus.innerText = `🔎 Ничего не найдено. Сбросьте фильтры`;
+                    return;
+                }
+
+                let html = '';
+                filtered.forEach(p => {
+                    const flavorsHtml = (p.flavors && p.flavors.length) 
+                        ? p.flavors.map(f => `<span class="flavor-tag">${escapeHtml(f)}</span>`).join('') 
+                        : '<span class="flavor-tag">—</span>';
+                    html += `
+                        <div class="product-card" data-product-id="${p.id}">
+                            <img class="product-image" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy" onerror="this.src='https://placehold.co/400x400/e2e8f0/1e293b?text=Фото+товара'">
+                            <div class="product-title">${escapeHtml(p.title)}</div>
+                            <div class="product-brand">${escapeHtml(p.brand)}</div>
+                            <div class="product-price">${escapeHtml(p.price)}</div>
+                            <div class="product-badge">${escapeHtml(p.strength)}</div>
+                            <div class="product-details">
+                                <div class="details-line"><span class="details-label"><i class="fas fa-tachometer-alt"></i> Крепость</span><span class="details-value">${escapeHtml(p.strength)}</span></div>
+                                <div class="details-line"><span class="details-label"><i class="fas fa-ice-cream"></i> Вкусы</span><div class="details-value flavors-list">${flavorsHtml}</div></div>
+                                <div class="details-line"><span class="details-label"><i class="fas fa-info-circle"></i> Описание</span><span class="details-value">${escapeHtml(p.description)}</span></div>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+                searchStatus.innerText = `✅ Найдено: ${filtered.length}  |  Категория: ${activeFilter.category || 'все'}  |  Бренд: ${activeFilter.brand || 'все'}`;
+            }
+
+            function escapeHtml(str) { return String(str).replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+            // Раскрытие описания по клику на карточку
+            container.addEventListener('click', (e) => {
+                const card = e.target.closest('.product-card');
+                if (card) card.classList.toggle('expanded');
+            });
+
+            function applySearch() {
+                activeFilter.search = searchInput.value.trim().toLowerCase();
+                renderProducts();
+            }
+            searchBtn.addEventListener('click', applySearch);
+            searchInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') applySearch(); });
+
+            // Категории
+            const categoryChips = document.querySelectorAll('[data-category-filter]');
+            function setActiveCategory(catValue) {
+                categoryChips.forEach(chip => {
+                    if (chip.dataset.categoryFilter === catValue && catValue !== '') chip.classList.add('active');
+                    else chip.classList.remove('active');
+                });
+            }
+            categoryChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const cat = chip.dataset.categoryFilter;
+                    if (activeFilter.category === cat) { activeFilter.category = ''; setActiveCategory(''); }
+                    else { activeFilter.category = cat; setActiveCategory(cat); }
+                    renderProducts();
+                });
+            });
+
+            // Бренды
+            const brandChips = document.querySelectorAll('[data-brand-filter]');
+            function setActiveBrand(brandVal) {
+                brandChips.forEach(chip => {
+                    if (chip.dataset.brandFilter === brandVal && brandVal !== '') chip.classList.add('active');
+                    else chip.classList.remove('active');
+                });
+            }
+            brandChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const brand = chip.dataset.brandFilter;
+                    if (activeFilter.brand === brand) { activeFilter.brand = ''; setActiveBrand(''); }
+                    else { activeFilter.brand = brand; setActiveBrand(brand); }
+                    renderProducts();
+                });
+            });
+
+            // Сброс фильтров
+            document.getElementById('globalResetBtn').addEventListener('click', () => {
+                searchInput.value = '';
+                activeFilter = { search: '', category: '', brand: '' };
+                setActiveCategory('');
+                setActiveBrand('');
+                renderProducts();
+            });
+
+            // Клик по логотипу тоже сбрасывает
+            document.querySelector('.logo-text')?.addEventListener('click', () => {
+                searchInput.value = '';
+                activeFilter = { search: '', category: '', brand: '' };
+                setActiveCategory('');
+                setActiveBrand('');
+                renderProducts();
+            });
+
+            // FAQ аккордеон
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+
+            renderProducts();
+        })();
+    </script>
+    </body>
+    </html>
