@@ -4,7 +4,7 @@
     <link rel="icon" href="logo.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <title>Бездымный Северодвинск</title>
+    <title>Бездымный Северодвинск | 18+</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -26,7 +26,6 @@
             padding: 0 24px;
         }
 
-        /* ===== ШАПКА ===== */
         .site-header {
             background: #0a0a0a;
             border-bottom: 1px solid #2a2a2a;
@@ -79,18 +78,144 @@
             color: #ffffff;
         }
 
-        /* ===== БЛОК ЗАКАЗА (темный с акцентами) ===== */
-        .order-block {
+        .auth-bar {
+            background: #0f0f0f;
+            border-radius: 60px;
+            padding: 6px 6px 6px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border: 1px solid #2a2a2a;
+        }
+
+        .auth-status {
+            font-size: 13px;
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+
+        .auth-status i {
+            color: #f0b90b;
+            margin-right: 6px;
+        }
+
+        .auth-login-btn, .auth-logout-btn {
+            background: #1f1f1f;
+            border: 1px solid #3a3a3a;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
+        }
+
+        .auth-login-btn:hover, .auth-logout-btn:hover {
+            background: #2a2a2a;
+            border-color: #f0b90b;
+        }
+
+        .auth-login-btn i, .auth-logout-btn i {
+            margin-right: 6px;
+        }
+
+        .auth-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 2100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .auth-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .auth-modal-card {
+            background: #0f0f0f;
+            border-radius: 48px;
+            max-width: 460px;
+            width: 90%;
+            padding: 36px 28px;
+            text-align: center;
+            border: 1px solid #f0b90b;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.8);
+        }
+
+        .auth-modal-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .auth-modal-desc {
+            color: #b0b3b8;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 14px 20px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 60px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .auth-input:focus {
+            border-color: #f0b90b;
+        }
+
+        .auth-submit {
+            background: #f0b90b;
+            color: black;
+            font-weight: 800;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 60px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .auth-submit:hover {
+            background: #ffcf40;
+        }
+
+        .auth-error {
+            color: #ff8888;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        .info-block {
             background: #111111;
             border-radius: 28px;
             padding: 24px 28px;
             margin: 28px 0 24px;
             border: 1px solid #2c2c2c;
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
-            transition: all 0.2s;
         }
 
-        .order-title {
+        .info-title {
             font-size: 22px;
             font-weight: 800;
             color: #ffffff;
@@ -101,12 +226,12 @@
             flex-wrap: wrap;
         }
 
-        .order-title i {
+        .info-title i {
             color: #f0b90b;
             font-size: 26px;
         }
 
-        .order-sub {
+        .info-sub {
             font-size: 14px;
             color: #b0b3b8;
             margin-bottom: 20px;
@@ -114,14 +239,14 @@
             padding-left: 12px;
         }
 
-        .order-buttons {
+        .contact-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 14px;
             margin-bottom: 20px;
         }
 
-        .order-btn {
+        .contact-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -133,28 +258,28 @@
             font-size: 15px;
         }
 
-        .order-btn.phone {
+        .contact-btn.phone {
             background: #1f1f1f;
             color: white;
             border: 1px solid #3a3a3a;
         }
-        .order-btn.tg {
+        .contact-btn.tg {
             background: #1e2a3a;
             color: #ffffff;
             border: 1px solid #2c3e50;
         }
-        .order-btn.vk {
+        .contact-btn.vk {
             background: #1f2c3c;
             color: white;
             border: 1px solid #2c4c6c;
         }
-        .order-btn:hover {
+        .contact-btn:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
             border-color: #f0b90b;
         }
 
-        .order-note {
+        .info-note {
             background: #0a0a0a;
             border-radius: 20px;
             padding: 12px 18px;
@@ -165,7 +290,6 @@
             display: inline-block;
         }
 
-        /* ===== ПОИСК ===== */
         .search-section {
             margin: 20px 0 20px;
         }
@@ -222,7 +346,6 @@
             color: #b0b3b8;
         }
 
-        /* ===== ФИЛЬТРЫ ===== */
         .filter-group {
             margin: 16px 0 14px;
         }
@@ -272,7 +395,6 @@
             color: white;
         }
 
-        /* ===== СЕТКА ТОВАРОВ ===== */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -299,22 +421,16 @@
             background: #101010;
         }
 
-        /* 18+ значок на карточке */
-        .age-badge-card {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(4px);
+        .price-placeholder {
+            font-size: 18px;
+            font-weight: 700;
             color: #f0b90b;
-            font-weight: 800;
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 20px;
-            border: 1px solid #f0b90b;
-            z-index: 2;
-            font-family: monospace;
-            letter-spacing: 0.5px;
+            background: #1e1e1e;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 30px;
+            width: fit-content;
+            margin: 6px 0;
         }
 
         .product-image {
@@ -361,30 +477,6 @@
             border: 1px solid #2a2a2a;
         }
 
-        .details-line {
-            display: flex;
-            margin-bottom: 12px;
-            font-size: 12px;
-            gap: 8px;
-            flex-wrap: wrap;
-            align-items: flex-start;
-        }
-
-        .details-label {
-            min-width: 70px;
-            font-weight: 700;
-            color: #b0b7c4;
-            flex-shrink: 0;
-        }
-
-        .details-value {
-            flex: 1;
-            color: #dddddd;
-            word-break: break-word;
-            white-space: normal;
-            line-height: 1.4;
-        }
-
         .flavors-list {
             display: flex;
             flex-wrap: wrap;
@@ -403,7 +495,6 @@
             white-space: normal;
         }
 
-        /* ===== МОДАЛЬНОЕ ОКНО (темная версия) ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -557,7 +648,6 @@
             color: #efefef;
         }
 
-        /* Модальное окно подтверждения возраста 18+ */
         .agegate-overlay {
             position: fixed;
             top: 0;
@@ -571,14 +661,10 @@
             align-items: center;
             justify-content: center;
             transition: opacity 0.4s ease;
-            opacity: 1;
-            visibility: visible;
         }
 
         .agegate-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+            display: none;
         }
 
         .agegate-card {
@@ -590,8 +676,6 @@
             text-align: center;
             border: 1px solid #f0b90b;
             box-shadow: 0 30px 50px rgba(0,0,0,0.8);
-            transform: scale(1);
-            transition: transform 0.3s;
         }
 
         .agegate-icon {
@@ -655,30 +739,6 @@
             color: #ff8888;
         }
 
-        @media (max-width: 580px) {
-            .modal-card {
-                padding: 20px 20px 24px;
-                width: 92%;
-            }
-            .modal-title {
-                font-size: 22px;
-            }
-            .modal-price {
-                font-size: 24px;
-            }
-            .modal-image {
-                max-width: 180px;
-            }
-            .agegate-card {
-                padding: 30px 24px;
-                width: 90%;
-            }
-            .agegate-title {
-                font-size: 28px;
-            }
-        }
-
-        /* ===== FAQ ===== */
         .faq-section {
             margin: 40px 0 48px;
             background: #0b0b0b;
@@ -767,11 +827,13 @@
         }
         @media (max-width: 900px) {
             .products-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-            .order-block { padding: 20px; }
-            .order-buttons { flex-direction: column; align-items: stretch; }
-            .order-btn { justify-content: center; }
+            .info-block { padding: 20px; }
+            .contact-buttons { flex-direction: column; align-items: stretch; }
+            .contact-btn { justify-content: center; }
             .logo-text { font-size: 20px; }
             .site-logo-img { width: 48px; height: 48px; }
+            .header-inner { flex-direction: column; align-items: stretch; }
+            .auth-bar { justify-content: space-between; }
         }
         @media (max-width: 580px) {
             .products-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -791,9 +853,6 @@
             .container { padding: 0 32px; }
         }
 
-        i, .fas, .fab {
-            color: inherit;
-        }
         ::-webkit-scrollbar {
             width: 8px;
             background: #0a0a0a;
@@ -806,12 +865,11 @@
 </head>
 <body>
 
-<!-- Модальное окно подтверждения возраста 18+ -->
 <div id="ageGateOverlay" class="agegate-overlay">
     <div class="agegate-card">
         <div class="agegate-icon"><i class="fas fa-exclamation-triangle"></i></div>
         <div class="agegate-title">18+</div>
-        <div class="agegate-text">Данный сайт содержит информацию о товарах, предназначенных только для совершеннолетних лиц.<br><br>Подтвердите, что вам есть 18 лет.</div>
+        <div class="agegate-text">Данный сайт носит информационный характер. Информация о товарах предназначена только для совершеннолетних лиц.<br><br>Подтвердите, что вам есть 18 лет.</div>
         <div class="agegate-buttons">
             <button id="ageConfirmYes" class="agegate-btn yes">Да, мне есть 18</button>
             <button id="ageConfirmNo" class="agegate-btn no">Нет, мне нет 18</button>
@@ -822,22 +880,27 @@
 <header class="site-header">
     <div class="container header-inner">
         <div class="logo-area">
-            <img class="site-logo-img" src="logo.png" alt="Бездымный Северодвинск" width="110" height="110">
+            <img class="site-logo-img" src="logo.png" alt="Бездымный Северодвинск">
             <span class="logo-text">БЕЗДЫМНЫЙ СЕВЕРОДВИНСК</span>
+        </div>
+        <div class="auth-bar" id="authBar">
+            <div class="auth-status" id="authStatus"><i class="fas fa-lock"></i> </div>
+            <button id="authLoginBtn" class="auth-login-btn"><i class="fas fa-key"></i> Вход для партнёров</button>
+            <button id="authLogoutBtn" class="auth-logout-btn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Выйти</button>
         </div>
     </div>
 </header>
 
 <main class="container">
-    <div class="order-block">
-        <div class="order-title"><i class="fas fa-shopping-cart"></i> Как заказать?</div>
-        <div class="order-sub">Выбирайте товары, свяжитесь с нами любым удобным способом — и мы всё оформим</div>
-        <div class="order-buttons">
-            <a href="tel:+79642999332" class="order-btn phone"><i class="fas fa-phone-alt"></i> 8 964 299-93-32</a>
-            <a href="https://t.me/bezdymnyi_zakaz" target="_blank" class="order-btn tg"><i class="fab fa-telegram-plane"></i> Telegram: @bezdymnyi_zakaz</a>
-            <a href="https://vk.com/bezdymnyi_severodvinsk" target="_blank" class="order-btn vk"><i class="fab fa-vk"></i> ВКонтакте</a>
+    <div class="info-block">
+        <div class="info-title"><i class="fas fa-info-circle"></i> Информация о наличии</div>
+        <div class="info-sub">Ознакомьтесь с ассортиментом. Для уточнения цен и получения подробной консультации свяжитесь с нами.</div>
+        <div class="contact-buttons">
+            <a href="tel:+79642999332" class="contact-btn phone"><i class="fas fa-phone-alt"></i> 8 964 299-93-32</a>
+            <a href="https://t.me/bezdymnyi_zakaz" target="_blank" class="contact-btn tg"><i class="fab fa-telegram-plane"></i> Telegram: @bezdymnyi_zakaz</a>
+            <a href="https://vk.com/bezdymnyi_severodvinsk" target="_blank" class="contact-btn vk"><i class="fab fa-vk"></i> ВКонтакте</a>
         </div>
-        <div class="order-note"><i class="fas fa-shield-alt"></i> ⚡ Оплачивать ничего заранее не нужно! Заказывайте через любой мессенджер.</div>
+        <div class="info-note"><i class="fas fa-shield-alt"></i> 🔒 Сайт НЕ принимает заказы и НЕ осуществляет продажу. Это информационный каталог.</div>
     </div>
 
     <section class="search-section">
@@ -855,7 +918,7 @@
             <div class="filter-chip" data-category-filter="снюс"><i class="fas fa-box"></i> Снюс (Жевательный табак)</div>
             <div class="filter-chip" data-category-filter="Никотиновые плистинки"><i class="fas fa-tablets"></i> Никотиновые плистинки</div>
             <div class="filter-chip" data-category-filter="электронные испарители"><i class="fas fa-wind"></i> Электронные испарители</div>
-            <div class="filter-chip" data-category-filter="картриджи"><i class="fas fa-exchange-alt"></i> Картриджи и испарители</div>
+            <div class="filter-chip" data-category-filter="картриджи"><i class="fas fa-exchange-alt"></i> Картриджи</div>
             <div class="filter-chip" data-category-filter="Никотиновые жидкости"><i class="fas fa-tint"></i> Никотиновые жидкости</div>
         </div>
     </div>
@@ -866,21 +929,20 @@
     </div>
 
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin: 24px 0 12px;">
-        <h3 style="font-weight: 700; font-size: 20px; color: #f0f0f0;"><i class="fas fa-cube"></i> Товары</h3>
+        <h3><i class="fas fa-cube"></i> Ассортимент</h3>
         <button class="reset-btn" id="globalResetBtn"><i class="fas fa-undo-alt"></i> Сбросить фильтры</button>
     </div>
+    
     <div class="products-grid" id="productsContainer"></div>
 
     <div class="faq-section">
         <div class="faq-title"><i class="fas fa-question-circle"></i> Частые вопросы</div>
-        <div class="faq-item"><div class="faq-question">Нужно ли оплачивать заказ заранее?<i class="fas fa-chevron-down"></i></div><div class="faq-answer">Нет! Вы ничего не оплачиваете вперед. Заказываете через любой удобный мессенджер, оплата при получении.</div></div>
-        <div class="faq-item"><div class="faq-question">Как оформить заказ?<i class="fas fa-chevron-down"></i></div><div class="faq-answer">Выберите товары, свяжитесь по телефону 8 964 299-93-32, в Telegram @bezdymnyi_zakaz или ВКонтакте. Назовите позиции — мы подтвердим наличие.</div></div>
-        <div class="faq-item"><div class="faq-question">Есть ли доставка по Северодвинску?<i class="fas fa-chevron-down"></i></div><div class="faq-answer">Да, работаем по городу. Уточняйте детали при заказе — возможна встреча или курьерская доставка.</div></div>
-        <div class="faq-item"><div class="faq-question">Можно ли забрать товар самовывозом?<i class="fas fa-chevron-down"></i></div><div class="faq-answer">Конечно! Согласуем удобное время и точку встречи в Северодвинске.</div></div>
-        <div class="faq-item"><div class="faq-question">Как узнать актуальный ассортимент?<i class="fas fa-chevron-down"></i></div><div class="faq-answer">На сайте основные позиции. Полный список и новинки уточняйте в мессенджерах — менеджер подскажет наличие.</div></div>
+        <div class="faq-item"><div class="faq-question">Как получить актуальную информацию о товаре?<i class="fas fa-chevron-down"></i></div><div class="faq-answer">Свяжитесь по телефону, Telegram или VK. Мы предоставим полную консультацию.</div></div>
+        <div class="faq-item"><div class="faq-question">Почему цены не отображаются?<i class="fas fa-chevron-down"></i></div><div class="faq-answer">Цены доступны только партнёрам после входа. Это требование законодательства и исключение публичной оферты. Для уточнения информации обращаться по мессенджерам/телефону.</div></div>
+        <div class="faq-item"><div class="faq-question">Работаете ли вы в Северодвинске?<i class="fas fa-chevron-down"></i></div><div class="faq-answer">Да, локация – Северодвинск. Все вопросы по месту уточняйте в личных сообщениях.</div></div>
     </div>
 
-    <div class="footer-note"><i class="fas fa-store"></i> Бездымный Северодвинск · Только для совершеннолетних 18+ · Заказ без предоплаты</div>
+    <div class="footer-note"><i class="fas fa-store"></i> Бездымный Северодвинск · 18+ · Информация не является публичной офертой</div>
 </main>
 
 <div id="productModal" class="modal-overlay">
@@ -890,18 +952,27 @@
         <div id="modalTitle" class="modal-title"></div>
         <div id="modalBrand" class="modal-brand"></div>
         <div id="modalPrice" class="modal-price"></div>
-        <div id="modalBadge" class="modal-badge"></div>
         <div class="modal-details">
-            <div class="modal-detail-line"><span class="modal-detail-label"><i class="fas fa-tachometer-alt"></i> Крепость</span><span id="modalStrength" class="details-value"></span></div>
-            <div class="modal-detail-line"><span class="modal-detail-label"><i class="fas fa-ice-cream"></i> Вкусы</span><div id="modalFlavors" class="details-value modal-flavors-list"></div></div>
-            <div class="modal-detail-line"><span class="modal-detail-label"><i class="fas fa-info-circle"></i> Описание</span><span id="modalDescription" class="details-value"></span></div>
+            <div class="modal-detail-line"><span class="modal-detail-label">Крепость</span><span id="modalStrength"></span></div>
+            <div class="modal-detail-line"><span class="modal-detail-label">Вкусы</span><div id="modalFlavors" class="modal-flavors-list"></div></div>
+            <div class="modal-detail-line"><span class="modal-detail-label">Описание</span><span id="modalDescription"></span></div>
         </div>
+    </div>
+</div>
+
+<div id="authModal" class="auth-modal-overlay">
+    <div class="auth-modal-card">
+        <div class="auth-modal-title"><i class="fas fa-lock-open"></i> Авторизация</div>
+        <div class="auth-modal-desc">Введите пароль. <strong style="color:#141414;">1234</strong><br>Нажимая «Войти», вы соглашаетесь, что сайт не осуществляет продажу, а цены носят информационный характер.</div>
+        <input type="password" id="authPassword" class="auth-input" placeholder="Пароль" autocomplete="off">
+        <button id="authSubmitBtn" class="auth-submit"><i class="fas fa-arrow-right"></i> Войти</button>
+        <div id="authErrorMsg" class="auth-error"></div>
     </div>
 </div>
 
 <script>
     (function(){
-        // ---------------------- ПОЛНЫЙ СПИСОК ТОВАРОВ ИЗ ФАЙЛА (ассортимент.xlsx) -------------------------
+        // Данные товаров (сокращённый набор для демо, полный список добавьте по аналогии)
         const productsData = [
             { id: 1, title: "ARQA", brand: "ARQA", category: "снюс", price: "550 ₽", strength: "70 мг", flavors: ["Кола 🥤","Энергетик 🥤","Манго/Клубника","Бабл Гам","Банановый крем","Молоко с ягодами","Нектарин/Банан","Холодные ягоды","Малина/Виноград","Клубника/Вишня","Клубничная Жвачка","Мята","Манго/Персик","Вишнёвый коктейль"], description: "кол-во пакетиков : 20 шт", image: "ARQA.jpg" },
             { id: 2, title: "NICTECH", brand: "NICTECH", category: "снюс", price: "550 ₽", strength: "60 мг", flavors: ["Энергетик","Зелёное яблоко","Клубника","Дыня","Кола","Кокос","Чизкейк","Манго","Виноград","Бергамот","Апельсин"], description: "кол-во пакетиков : 20 шт", image: "NICTECH.jpg" },
@@ -962,7 +1033,7 @@
             { id: 60, title: "XYLINET", brand: "XYLINET", category: "Никотиновые жидкости", price: "450 ₽", strength: "69 mg", flavors: ["Ananasovyi kamshot","Kaktusovyui kaning","Tropicheskiy skvirt","Persikovyi kuni","Myatnaya irrymatsiya","Yagodnyi gang bang","Yablochnoye proniknovenie","Vinogradnyi orgazm","Mangovyi frottaj","Klybnichnyi minet","Kislo-sladkiy felching","Ezhevichnyi bdsm","Energichnyi sving","Kink kiwi","Malinovyi fisting"], description: "30 мл", image: "XYLINET.jpg" }
         ];
 
-        // Заполнение брендов
+        // Бренды
         const brandChipsContainer = document.getElementById('brandChips');
         const uniqueBrands = [...new Set(productsData.map(p => p.brand))].sort();
         uniqueBrands.forEach(b => {
@@ -973,23 +1044,30 @@
             brandChipsContainer.appendChild(chip);
         });
 
-        const container = document.getElementById('productsContainer');
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchButton');
-        const searchStatus = document.getElementById('searchStatus');
         let activeFilter = { search: '', category: '', brand: '' };
         let ageVerified = false;
+        let isAuthorized = false;
 
-        // 18+ логика
+        // Эйдж гейт с сохранением в localStorage
         const ageGate = document.getElementById('ageGateOverlay');
         const confirmYes = document.getElementById('ageConfirmYes');
         const confirmNo = document.getElementById('ageConfirmNo');
 
-        function showAgeGate() { ageGate.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
-        function hideAgeGate() { ageGate.classList.add('hidden'); document.body.style.overflow = ''; }
+        function hideAgeGate() { 
+            ageGate.classList.add('hidden'); 
+            document.body.style.overflow = ''; 
+        }
+
+        // Проверяем сохранённый возраст при загрузке
+        const savedAge = localStorage.getItem('ageVerified');
+        if (savedAge === 'true') {
+            ageVerified = true;
+            hideAgeGate();
+        }
 
         confirmYes.addEventListener('click', () => {
             ageVerified = true;
+            localStorage.setItem('ageVerified', 'true');
             hideAgeGate();
             renderProducts();
         });
@@ -998,25 +1076,134 @@
             document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#fff;text-align:center;padding:20px;"><div><i class="fas fa-ban" style="font-size:64px;color:#f0b90b;margin-bottom:20px;"></i><h1>Доступ запрещён</h1><p>Данный сайт содержит информацию только для лиц старше 18 лет.</p></div></div>';
         });
 
+        // Авторизация
+        const authModal = document.getElementById('authModal');
+        const authLoginBtn = document.getElementById('authLoginBtn');
+        const authLogoutBtn = document.getElementById('authLogoutBtn');
+        const authStatusDiv = document.getElementById('authStatus');
+        const authSubmitBtn = document.getElementById('authSubmitBtn');
+        const authPassword = document.getElementById('authPassword');
+        const authErrorMsg = document.getElementById('authErrorMsg');
+
+        function openAuthModal() { authModal.classList.add('active'); authPassword.value = ''; authErrorMsg.innerText = ''; }
+        function closeAuthModal() { authModal.classList.remove('active'); }
+
+        function setAuthorized(state) {
+            isAuthorized = state;
+            if(state) {
+                authStatusDiv.innerHTML = '<i class="fas fa-check-circle"></i> авторизирован';
+                authLoginBtn.style.display = 'none';
+                authLogoutBtn.style.display = 'inline-flex';
+                localStorage.setItem('priceAuth', 'true');
+            } else {
+                authStatusDiv.innerHTML = '<i class="fas fa-lock"></i>';
+                authLoginBtn.style.display = 'inline-flex';
+                authLogoutBtn.style.display = 'none';
+                localStorage.removeItem('priceAuth');
+            }
+            renderProducts();
+        }
+
+        authLoginBtn.addEventListener('click', openAuthModal);
+        authLogoutBtn.addEventListener('click', () => setAuthorized(false));
+        authSubmitBtn.addEventListener('click', () => {
+            const pwd = authPassword.value.trim();
+            if(pwd === '1234') {
+                closeAuthModal();
+                setAuthorized(true);
+            } else {
+                authErrorMsg.innerText = 'Неверный пароль. Доступ только для партнёров.';
+            }
+        });
+        document.getElementById('authModal').addEventListener('click', (e) => { if(e.target === authModal) closeAuthModal(); });
+
+        // Восстанавливаем авторизацию
+        if(localStorage.getItem('priceAuth') === 'true') {
+            isAuthorized = true;
+            authStatusDiv.innerHTML = '<i class="fas fa-check-circle"></i> авторизован';
+            authLoginBtn.style.display = 'none';
+            authLogoutBtn.style.display = 'inline-flex';
+        }
+
+        const container = document.getElementById('productsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchButton');
+        const searchStatus = document.getElementById('searchStatus');
+
+        function escapeHtml(str) { 
+            return String(str || '').replace(/[&<>]/g, function(m){ 
+                if(m==='&') return '&amp;'; 
+                if(m==='<') return '&lt;'; 
+                if(m==='>') return '&gt;'; 
+                return m;
+            }); 
+        }
+
+        function renderProducts() {
+            if (!ageVerified) {
+                container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px 20px;"><i class="fas fa-lock" style="font-size:64px; color:#f0b90b;"></i><p style="margin-top:20px; font-size:18px;">Контент скрыт. Подтвердите возраст 18+</p></div>`;
+                searchStatus.innerText = `⛔ Подтвердите возраст для просмотра товаров`;
+                return;
+            }
+            
+            const filtered = productsData.filter(p => {
+                const searchLower = activeFilter.search;
+                const searchMatch = !searchLower || p.title.toLowerCase().includes(searchLower) || p.brand.toLowerCase().includes(searchLower) || (p.flavors && p.flavors.some(f => f.toLowerCase().includes(searchLower))) || (p.description && p.description.toLowerCase().includes(searchLower));
+                const catMatch = !activeFilter.category || p.category === activeFilter.category;
+                const brandMatch = !activeFilter.brand || p.brand === activeFilter.brand;
+                return searchMatch && catMatch && brandMatch;
+            });
+            
+            if (!filtered.length) {
+                container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:48px 20px;"><i class="fas fa-box-open" style="font-size:44px; color:#f0b90b;"></i><p style="margin-top:16px; color:#aaa;">Товары не найдены</p></div>`;
+                searchStatus.innerText = `🔎 Ничего не найдено`;
+                return;
+            }
+            
+            let html = '';
+            filtered.forEach(p => {
+                const flavorsHtml = (p.flavors && p.flavors.length) ? p.flavors.slice(0, 8).map(f => `<span class="flavor-tag">${escapeHtml(f)}</span>`).join('') : '<span class="flavor-tag">—</span>';
+                const priceDisplay = isAuthorized ? `<div class="product-price">${escapeHtml(p.price)}</div>` : `<div class="price-placeholder">💰 Цена по запросу</div>`;
+                html += `<div class="product-card" data-product='${JSON.stringify(p).replace(/'/g, "&#39;")}'>
+                            <img class="product-image" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy" onerror="this.src='https://placehold.co/400x400/222222/f0b90b?text=Фото'">
+                            <div class="product-title">${escapeHtml(p.title)}</div>
+                            <div class="product-brand">${escapeHtml(p.brand)}</div>
+                            ${priceDisplay}
+                            <div class="product-badge">${escapeHtml(p.strength)}</div>
+                            <div class="flavors-list">${flavorsHtml}</div>
+                         </div>`;
+            });
+            container.innerHTML = html;
+            searchStatus.innerText = `✅ Найдено: ${filtered.length} | Категория: ${activeFilter.category || 'все'} | Бренд: ${activeFilter.brand || 'все'}`;
+            
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const product = JSON.parse(card.dataset.product);
+                    openModal(product);
+                });
+            });
+        }
+
+        // Модалка товара
         const modal = document.getElementById('productModal');
         const modalClose = document.getElementById('modalCloseBtn');
         const modalImage = document.getElementById('modalImage');
         const modalTitle = document.getElementById('modalTitle');
         const modalBrand = document.getElementById('modalBrand');
         const modalPrice = document.getElementById('modalPrice');
-        const modalBadge = document.getElementById('modalBadge');
         const modalStrength = document.getElementById('modalStrength');
         const modalFlavors = document.getElementById('modalFlavors');
         const modalDescription = document.getElementById('modalDescription');
 
         function openModal(product) {
             if (!ageVerified) return;
+            
             modalImage.src = product.image;
             modalImage.alt = product.title;
             modalTitle.textContent = product.title;
             modalBrand.textContent = product.brand;
-            modalPrice.textContent = product.price;
-            modalBadge.textContent = product.strength || '—';
+            const priceModal = isAuthorized ? product.price : '💰 Цена по запросу (авторизуйтесь)';
+            modalPrice.textContent = priceModal;
             modalStrength.textContent = product.strength || '—';
             if (product.flavors && product.flavors.length) {
                 modalFlavors.innerHTML = product.flavors.map(f => `<span class="modal-flavor-tag">${escapeHtml(f)}</span>`).join('');
@@ -1037,64 +1224,7 @@
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 
-        function escapeHtml(str) { 
-            if(!str) return '';
-            return String(str).replace(/[&<>]/g, function(m){ 
-                if(m==='&') return '&amp;'; 
-                if(m==='<') return '&lt;'; 
-                if(m==='>') return '&gt;'; 
-                return m;
-            }); 
-        }
-
-        function renderProducts() {
-            if (!ageVerified) {
-                container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px 20px;"><i class="fas fa-lock" style="font-size:64px; color:#f0b90b;"></i><p style="margin-top:20px; font-size:18px;">Контент скрыт. Подтвердите возраст 18+</p></div>`;
-                searchStatus.innerText = `⛔ Подтвердите возраст для просмотра товаров`;
-                return;
-            }
-            
-            const filtered = productsData.filter(p => {
-                const searchLower = activeFilter.search;
-                const searchMatch = !searchLower || p.title.toLowerCase().includes(searchLower) || p.brand.toLowerCase().includes(searchLower) || (p.flavors && p.flavors.some(f => f.toLowerCase().includes(searchLower))) || (p.description && p.description.toLowerCase().includes(searchLower));
-                const catMatch = !activeFilter.category || p.category === activeFilter.category;
-                const brandMatch = !activeFilter.brand || p.brand.toLowerCase() === activeFilter.brand.toLowerCase();
-                return searchMatch && catMatch && brandMatch;
-            });
-            
-            if (!filtered.length) {
-                container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:48px 20px;"><i class="fas fa-box-open" style="font-size:44px; color:#f0b90b;"></i><p style="margin-top:16px; color:#aaa;">Товары не найдены</p></div>`;
-                searchStatus.innerText = `🔎 Ничего не найдено`;
-                return;
-            }
-            
-            let html = '';
-            filtered.forEach(p => {
-                const flavorsHtml = (p.flavors && p.flavors.length) ? p.flavors.slice(0, 8).map(f => `<span class="flavor-tag">${escapeHtml(f)}</span>`).join('') : '<span class="flavor-tag">—</span>';
-                html += `<div class="product-card" data-product='${JSON.stringify(p).replace(/'/g, "&#39;")}'>
-                    <div class="age-badge-card"><i class="fas fa-exclamation-circle"></i> 18+</div>
-                    <img class="product-image" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy" onerror="this.src='https://placehold.co/400x400/222222/f0b90b?text=Фото'">
-                    <div class="product-title">${escapeHtml(p.title)}</div>
-                    <div class="product-brand">${escapeHtml(p.brand)}</div>
-                    <div class="product-price">${escapeHtml(p.price)}</div>
-                    <div class="product-badge">${escapeHtml(p.strength)}</div>
-                    <div class="flavors-list">${flavorsHtml}</div>
-                </div>`;
-            });
-            container.innerHTML = html;
-            searchStatus.innerText = `✅ Найдено: ${filtered.length} | Категория: ${activeFilter.category || 'все'} | Бренд: ${activeFilter.brand || 'все'}`;
-            
-            document.querySelectorAll('.product-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    const productData = JSON.parse(card.dataset.product);
-                    openModal(productData);
-                });
-            });
-        }
-
-        searchBtn.addEventListener('click', () => { if(ageVerified) { activeFilter.search = searchInput.value.trim().toLowerCase(); renderProducts(); } });
-        searchInput.addEventListener('keypress', (e) => { if(e.key === 'Enter' && ageVerified) { activeFilter.search = searchInput.value.trim().toLowerCase(); renderProducts(); } });
-
+        // Фильтры
         const categoryChips = document.querySelectorAll('[data-category-filter]');
         const setActiveCategory = (val) => categoryChips.forEach(ch => ch.classList.toggle('active', ch.dataset.categoryFilter === val && val !== ''));
         categoryChips.forEach(ch => ch.addEventListener('click', () => {
@@ -1125,12 +1255,14 @@
             setActiveBrand('');
             renderProducts();
         });
-        
+
+        searchBtn.addEventListener('click', () => { if(ageVerified) { activeFilter.search = searchInput.value.trim().toLowerCase(); renderProducts(); } });
+        searchInput.addEventListener('keypress', (e) => { if(e.key === 'Enter' && ageVerified) { activeFilter.search = searchInput.value.trim().toLowerCase(); renderProducts(); } });
+
+        // FAQ
         document.querySelectorAll('.faq-item').forEach(item => item.querySelector('.faq-question')?.addEventListener('click', () => item.classList.toggle('active')));
         
-        // Начальное состояние: показываем гейт, контент скрыт
-        ageVerified = false;
-        showAgeGate();
+        // Первоначальный рендер
         renderProducts();
     })();
 </script>
